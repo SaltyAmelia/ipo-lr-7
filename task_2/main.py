@@ -1,40 +1,30 @@
 #Мигунов
 import json
 
-with open("dump.json", "r", encoding="utf-8") as f:
-    data = json.load(f)
-
-skills = []
-for item in data:
-    if item.get("model") == "data.skill":
-        code = item["fields"]["code"]
-        title = item["fields"]["title"]
-        skills.append({"code": code, "title": title})
-        
 print("start code ...")
 
-user_code = input("Введите номер квалификации: ").strip()
+with open("dump.json", "r", encoding="utf-8") as file:
+    content = json.load(file)
 
-chain = []
-for skill in skills:
-    skill_code = skill["code"]
-    if user_code == skill_code or user_code.startswith(skill_code + "-"):
-        chain.append(skill)
+search_val = input("Введите номер квалификации: ")
 
-chain.sort(key=lambda x: len(x["code"]))
+result_list = []
 
-seen = set()
-unique_chain = []
-for skill in chain:
-    if skill["code"] not in seen:
-        unique_chain.append(skill)
-        seen.add(skill["code"])
+for item in content:
+    if item["model"] == "data.skill":
+        code = item["fields"]["code"]
+        name = item["fields"]["title"]
+        
+        if code == search_val or code.startswith(search_val + "."):
+            result_list.append([code, name])
 
-if unique_chain:
-    print("============== Найдено ==============")
-    for skill in unique_chain:
-        print(f"{skill['code']} >> {skill['title']}")
+result_list.sort()
+
+if len(result_list) > 0:
+    print("=============== Найдено ===============")
+    for element in result_list:
+        print(f"{element[0]} >> {element[1]}")
 else:
-    print("============== Не найдено ==============")
-    
+    print("=============== Не найдено ===============")
+
 print("... end code")
