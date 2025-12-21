@@ -1,4 +1,4 @@
-# Мигунов
+#Мигунов, Вариант 3
 print("start code ...")
 
 books = [
@@ -8,7 +8,7 @@ books = [
         'year': 1949
     },
     {
-        'title': 'Гарри Поттер ',
+        'title': 'Гарри Поттер',
         'author': 'Джоан Роулинг',
         'year': 1997
     },
@@ -28,11 +28,11 @@ books = [
         'year': 1979
     }
 ]
-
-count = 1
-for book in books:    
-    print( '-' * 50 + f"Книга {count}" +'-' * 50)
+n = 1
+for book in books:
+    print(f" ---------------------- Книга {n} -----------------------")
     print(f" Название: {book['title']}, Автор: {book['author']},")
-    print ('-' * 50 , book['year'] , '-' * 50, end='\n\n')
-    count += 1
+    print(f" -------------------------{book['year']}-------------------------")
+    print()
+    n = n + 1
 print("... end code")
